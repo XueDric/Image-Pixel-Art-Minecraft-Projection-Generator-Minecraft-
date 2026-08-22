@@ -1,0 +1,6 @@
+# 仓库统一使用 LF 换行，避免 Windows/Unix 混用导致的 diff 噪音
+* text=auto eol=lf
+
+# 二进制/图片不要做文本规范化
+*.png binary
+*.ico binary
