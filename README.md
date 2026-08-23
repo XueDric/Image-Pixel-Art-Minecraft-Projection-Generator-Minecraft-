@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/github/license/XueDric/image-to-mc-pixelart)](LICENSE)
 
 > 一条流水线把**任意图片**变成 **Minecraft 建筑投影（`.litematic`）**。
-> 简体中文文档见 [docs/使用说明.md](docs/使用说明.md)。
+> 简体中文文档见 [README.zh.md](README.zh.md)。
 
 A two-stage pipeline that turns any image into a **Litematica building schematic** you can load in Minecraft:
 
@@ -104,7 +104,7 @@ Cross-validated against **litemapy** (independent implementation) block-by-block
 ├── requirements-dev.txt  # Dev/test deps (pytest, litemapy)
 ├── LICENSE               # MIT
 ├── examples/ ... 示例/       # Sample input + preview
-├── docs/使用说明.md         # Full Chinese manual
+├── README.zh.md         # Full Chinese manual
 ├── .github/workflows/ci.yml # CI: pytest on Ubuntu + Windows
 └── 测试/                 # Tests (litemapy cross-check + NBT round-trip)
 ```

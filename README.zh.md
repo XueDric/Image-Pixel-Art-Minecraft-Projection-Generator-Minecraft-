@@ -157,7 +157,7 @@ python cli.py 图片.png    # 命令行
 ├── pixelart2litematic.py # 方块匹配/投影生成/预览渲染
 ├── app_icon.ico          # 程序图标
 ├── requirements.txt
-├── 使用说明.md
+├── README.zh.md
 ├── 打包说明.md
 ├── 打包程序/              # 已打包的 exe
 └── 测试/
