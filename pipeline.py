@@ -480,7 +480,7 @@ def run_stage2(stage1: Stage1Result, *, mc_palette="auto", dither="floyd",
                origin=(0, 0, 0), name="像素画", author="", description="",
                mc_data_version=3955, out_path=None, preview=True, stats=True,
                cell=14, orientation="wall", glass_cleanup=True,
-               progress_cb=None):
+               lang="zh", progress_cb=None):
     """阶段2：把像素画网格转成 .litematic 投影。
 
     透明格子（None，背景已去除）→ 空气，形成镂空效果。
@@ -549,7 +549,7 @@ def run_stage2(stage1: Stage1Result, *, mc_palette="auto", dither="floyd",
     if stats:
         stats_path = os.path.splitext(out_path)[0] + ".stats.xlsx"
         report(96.5, "阶段2 生成材料清单")
-        stats_path = write_stats_xlsx(stats_path, counts)
+        stats_path = write_stats_xlsx(stats_path, counts, lang=lang)
     report(100.0, "完成")
 
     return {
@@ -582,7 +582,7 @@ def run_pipeline(image_path, *, width=48, height=48, preserve_aspect=False,
                  name="像素画", author="", description="", mc_data_version=3955,
                  out_dir=None, mc_preview=True, mc_stats=True, cell=14,
                  orientation="wall", glass_cleanup=True,
-                 export_pixel_art=False, progress_cb=None):
+                 export_pixel_art=False, lang="zh", progress_cb=None):
     """完整两阶段转换：图片 → 像素画 → .litematic。
 
     :param background: "none"=不处理 / "trim"=去除背景（镂空）/
@@ -623,12 +623,13 @@ def run_pipeline(image_path, *, width=48, height=48, preserve_aspect=False,
         mc_data_version=mc_data_version, out_path=out_path,
         preview=mc_preview, stats=mc_stats, cell=cell,
         orientation=orientation, glass_cleanup=glass_cleanup,
-        progress_cb=report,
+        lang=lang, progress_cb=report,
     )
 
     pixel_art_path = None
     if export_pixel_art:
-        pixel_art_path = os.path.join(base_dir, stem + "_像素画.png")
+        suffix = "_pixel_art.png" if lang == "en" else "_像素画.png"
+        pixel_art_path = os.path.join(base_dir, stem + suffix)
         stage1.pure_image.save(pixel_art_path)
 
     return {
@@ -643,7 +644,7 @@ def run_pipeline(image_path, *, width=48, height=48, preserve_aspect=False,
 # ---------------------------------------------------------------------------
 # 材料清单导出（Excel）
 # ---------------------------------------------------------------------------
-def write_stats_xlsx(path, counts):
+def write_stats_xlsx(path, counts, lang="zh"):
     """把方块用量写为 Excel 材料清单（.xlsx）。
 
     列：序号 | 方块(中文) | 方块ID | 数量 | 颜色HEX | 颜色预览(色块)。
@@ -655,7 +656,7 @@ def write_stats_xlsx(path, counts):
 
     def _csv_fallback():
         csv_path = os.path.splitext(path)[0] + ".csv"
-        pixelart2litematic.write_stats(csv_path, counts)
+        pixelart2litematic.write_stats(csv_path, counts, lang=lang)
         return csv_path
 
     try:
@@ -667,23 +668,35 @@ def write_stats_xlsx(path, counts):
 
     wb = openpyxl.Workbook()
     ws = wb.active
-    ws.title = "材料清单"
-
     total = sum(counts.values())
     items = sorted(counts.items(), key=lambda kv: -kv[1])
+
+    if lang == "en":
+        ws.title = "Material List"
+        sheet_title = "Pixel Art Block Material List"
+        info_line = f"{len(items)} block types, {total} blocks total"
+        headers = ["#", "Block (English)", "Block ID", "Count", "Color HEX", "Color Preview"]
+        name_fn = mc_names.en_name
+        total_label = "Total"
+    else:
+        ws.title = "材料清单"
+        sheet_title = "像素画方块材料清单"
+        info_line = f"共 {len(items)} 种方块，合计 {total} 个"
+        headers = ["序号", "方块（中文）", "方块ID", "数量", "颜色HEX", "颜色预览"]
+        name_fn = mc_names.cn_name
+        total_label = "合计"
 
     # 标题 + 信息
     ws.merge_cells("A1:F1")
     c = ws["A1"]
-    c.value = "像素画方块材料清单"
+    c.value = sheet_title
     c.font = Font(size=14, bold=True)
     c.alignment = Alignment(horizontal="center", vertical="center")
     ws.row_dimensions[1].height = 26
-    ws["A2"] = f"共 {len(items)} 种方块，合计 {total} 个"
+    ws["A2"] = info_line
     ws["A2"].font = Font(size=10, color="666666")
 
     # 表头
-    headers = ["序号", "方块（中文）", "方块ID", "数量", "颜色HEX", "颜色预览"]
     header_fill = PatternFill("solid", fgColor="4472C4")
     header_font = Font(bold=True, color="FFFFFF")
     for col, text in enumerate(headers, start=1):
@@ -698,7 +711,7 @@ def write_stats_xlsx(path, counts):
         rgb = ALL_BLOCKS.get(bid, (0, 0, 0))
         hex_str = "#%02X%02X%02X" % rgb
         ws.cell(row=row, column=1, value=i)
-        ws.cell(row=row, column=2, value=mc_names.cn_name(bid))
+        ws.cell(row=row, column=2, value=name_fn(bid))
         ws.cell(row=row, column=3, value=bid.replace("minecraft:", ""))
         ws.cell(row=row, column=4, value=cnt)
         ws.cell(row=row, column=5, value=hex_str)
@@ -709,7 +722,7 @@ def write_stats_xlsx(path, counts):
 
     # 合计行
     last = 3 + len(items)
-    ws.cell(row=last + 1, column=2, value="合计").font = Font(bold=True)
+    ws.cell(row=last + 1, column=2, value=total_label).font = Font(bold=True)
     tot = ws.cell(row=last + 1, column=4, value=total)
     tot.font = Font(bold=True)
     tot.alignment = Alignment(horizontal="right")
@@ -730,9 +743,16 @@ def write_stats_xlsx(path, counts):
 # ---------------------------------------------------------------------------
 # 便捷函数
 # ---------------------------------------------------------------------------
-def block_usage_summary(stage2):
-    """返回 MC 方块用量的可读摘要行。"""
+def block_usage_summary(stage2, lang="zh"):
+    """返回 MC 方块用量的可读摘要行（lang: 'zh' 或 'en'）。"""
     r = stage2
+    if lang == "en":
+        orient = ("wall (vertical)" if r.get("orientation", "wall") == "wall"
+                  else "floor (horizontal)")
+        return (f"{r['w']}×{r['h']} px → {r['w'] * r['scale']}×{r['h'] * r['scale']}"
+                f"×{r['thickness']} blocks, {r['total_blocks']} blocks / "
+                f"{r['distinct_blocks']} kinds, palette {r['mc_palette_kind']}, "
+                f"colorspace {r['color_space']}, {orient}")
     orient = "竖放(墙面/平视)" if r.get("orientation", "wall") == "wall" else "横放(地面/俯视)"
     return (f"{r['w']}×{r['h']} 像素 → {r['w'] * r['scale']}×{r['h'] * r['scale']}"
             f"×{r['thickness']} 方块，共 {r['total_blocks']} 个 / "

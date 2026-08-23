@@ -176,6 +176,12 @@ class App:
                 self.size_var.set(self._t("自定义"))
         except Exception:
             pass
+        # 默认投影名随语言切换（仅当仍是默认值时）
+        try:
+            if self.name_var.get() in ("像素画", "Pixel Art"):
+                self.name_var.set(self._pick("像素画", "Pixel Art"))
+        except Exception:
+            pass
 
     # ---------------------------------------------------------------- UI
     def _build_ui(self):
@@ -470,9 +476,10 @@ class App:
             scale=scale, thickness=thickness,
             backing=self.backing_var.get().strip() or None,
             origin=origin,
-            name=self.name_var.get().strip() or "像素画",
+            name=self.name_var.get().strip() or self._pick("像素画", "Pixel Art"),
             author=self.author_var.get().strip(),
             orientation=self.orientation_var.get(),
+            lang=self.lang,
             out_path=os.path.join(out_dir, stem + ".litematic"),
         )
 
@@ -616,9 +623,9 @@ class App:
         self.progress.configure(value=100)
         self.progress_label.configure(text=self._t("完成"))
         self.set_status(self._tfmt("MC投影生成完成：{summary}", "MC projection ready: {summary}",
-                                   summary=pipeline.block_usage_summary(res)))
+                                   summary=pipeline.block_usage_summary(res, self.lang)))
         self._log(self._tfmt("✅ 阶段2 {summary}", "✅ Stage 2 {summary}",
-                             summary=pipeline.block_usage_summary(res)))
+                             summary=pipeline.block_usage_summary(res, self.lang)))
         self._log(self._tfmt("   投影: {p} ({kb} KB)", "   Projection: {p} ({kb} KB)",
                              p=res["out"], kb=res["file_size"] / 1024))
         if res.get("preview"):
@@ -734,7 +741,9 @@ class App:
             return
         path = filedialog.asksaveasfilename(
             title=self._t("导出纯像素画 PNG（每格=1px）"), defaultextension=".png",
-            initialfile=f"像素画_{self.stage1.size[0]}x{self.stage1.size[1]}.png",
+            initialfile=self._pick(
+                f"像素画_{self.stage1.size[0]}x{self.stage1.size[1]}.png",
+                f"pixel_art_{self.stage1.size[0]}x{self.stage1.size[1]}.png"),
             filetypes=[(self._t("PNG 图片"), "*.png")])
         if not path:
             return

@@ -105,3 +105,9 @@ def cn_name(block_id: str) -> str:
 def cn_name_full(block_id: str) -> str:
     """中文名 + 英文 ID，如 "白色羊毛 (white_wool)"。"""
     return f"{cn_name(block_id)} ({block_id.replace('minecraft:', '')})"
+
+
+def en_name(block_id: str) -> str:
+    """方块 ID -> 人类可读英文名（如 minecraft:white_wool -> White Wool）。"""
+    key = block_id.replace("minecraft:", "")
+    return key.replace("_", " ").title()

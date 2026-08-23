@@ -252,10 +252,11 @@ def render_preview(grid, size, cell=14, out_path=None):
         return img
 
 
-def write_stats(path, counts):
+def write_stats(path, counts, lang="zh"):
+    header = ["方块", "数量", "颜色(RGB)"] if lang != "en" else ["Block", "Count", "Color (RGB)"]
     with open(path, "w", newline="", encoding="utf-8-sig") as f:
         writer = csv.writer(f)
-        writer.writerow(["方块", "数量", "颜色(RGB)"])
+        writer.writerow(header)
         for bid, cnt in sorted(counts.items(), key=lambda kv: -kv[1]):
             rgb = BLOCK_COLOR.get(bid, (0, 0, 0))
             writer.writerow([bid, cnt, "#%02X%02X%02X" % rgb])

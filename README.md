@@ -31,7 +31,7 @@ A two-stage pipeline that turns any image into a **Litematica building schematic
 - **Material list** — sorted Excel with Chinese block names, counts and color swatches (openpyxl), CSV fallback.
 - **Fast** — numpy-vectorized color matching handles million-pixel images in seconds.
 - **Auto-excludes unstable blocks** — ice (melts), snow layers, soul sand, bedrock, slime/honey (see `mc_palette.py`).
-- **Bilingual GUI** — the desktop app (Tkinter) can switch between **Chinese (`中文`)** and **English** (language selector in the control panel).
+- **Bilingual GUI** — the desktop app (Tkinter) can switch between **Chinese (`中文`)** and **English** (language selector in the control panel). The on-screen summary and the material list follow the chosen language.
 
 > **Why does pure red become orange?** The default CIE Lab distance judges `#FF0000` perceptually closer to orange wool. Use `--color-space rgb` for a literal nearest-color.
 
