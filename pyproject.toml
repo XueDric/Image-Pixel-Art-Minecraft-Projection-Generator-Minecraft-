@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mc-pixelart-projection"
+version = "1.0.0"
+description = "Convert any image into a Minecraft Litematica building projection (.litematic), plus a blockified preview and a material list."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Your Name", email = "you@example.com" }]   # TODO: 发布前替换成你的署名
+keywords = ["minecraft", "pixel-art", "litematic", "schematic", "image-to-schematic"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Games/Entertainment",
+    "Topic :: Multimedia :: Graphics",
+]
+dependencies = [
+    "Pillow>=10.0",
+    "numpy>=1.24",
+    "openpyxl>=3.1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0", "litemapy>=0.3"]
+
+# 安装后提供两个命令：`mc-pixelart`（命令行）、`mc-pixelart-gui`（图形界面）
+[project.scripts]
+mc-pixelart = "cli:main"
+mc-pixelart-gui = "main:main"
+
+# 本项目是扁平的脚本模块，用 py-modules 打进 wheel
+[tool.setuptools]
+py-modules = [
+    "main",
+    "cli",
+    "pipeline",
+    "mc_palette",
+    "mc_names",
+    "litematic_writer",
+    "pixelart2litematic",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["测试"]
+pythonpath = [".", "测试"]
+addopts = "-ra"

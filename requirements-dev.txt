@@ -1,0 +1,5 @@
+# 开发 / 测试依赖（CI 与本地开发安装）
+# 用法: pip install -r requirements.txt -r requirements-dev.txt
+-r requirements.txt
+pytest>=7.0
+litemapy>=0.3

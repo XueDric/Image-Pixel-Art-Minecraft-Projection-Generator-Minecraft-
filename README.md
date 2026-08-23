@@ -95,18 +95,26 @@ Cross-validated against **litemapy** (independent implementation) block-by-block
 ├── litematic_writer.py   # .litematic v7 NBT writer
 ├── pixelart2litematic.py # Pixel art -> blocks -> schematic / preview
 ├── mc_names.py           # Chinese block names for the material list
+├── pyproject.toml        # Metadata + deps + pytest/ruff config (`pip install .`)
+├── build.spec            # Reproducible PyInstaller build (one command -> 2 exes)
+├── requirements.txt      # Runtime deps
+├── requirements-dev.txt  # Dev/test deps (pytest, litemapy)
+├── LICENSE               # MIT
 ├── examples/ ... 示例/       # Sample input + preview
 ├── docs/使用说明.md         # Full Chinese manual
+├── .github/workflows/ci.yml # CI: pytest on Ubuntu + Windows
 └── 测试/                 # Tests (litemapy cross-check + NBT round-trip)
 ```
 
 ## Development
 
 ```bash
-pip install -r requirements.txt
-python 测试/test_pipeline.py      # run the integration / validation suite
-python main.py --self-test <dir>  # headless self-test (also used for packaged builds)
+pip install -r requirements-dev.txt   # adds pytest + litemapy (for tests)
+pytest 测试/                          # run the integration / validation suite
+python main.py --self-test <dir>      # headless self-test (also used for packaged builds)
 ```
+
+CI runs `pytest 测试/` on **Ubuntu** and **Windows** for every push / pull request (see `.github/workflows/ci.yml`).
 
 ## License
 

@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+
+jobs:
+  test:
+    name: Test (${{ matrix.os }}, py${{ matrix.python-version }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: ["3.12"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements-dev.txt
+
+      - name: Run test suite (pytest)
+        run: pytest 测试/ -v
+
+      # 无头自检：验证打包环境（直接运行每步即可，GUI 的 tkinter 在 Windows 自带）
+      - name: Headless self-test (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: python main.py --self-test "${{ runner.temp }}/selftest"
+
+      - name: Confirm self-test result (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $result = Get-Content "${{ runner.temp }}/selftest/self_test_result.txt" -Raw
+          if ($result -notmatch 'SELF TEST OK') { throw "Self-test failed:`n$result" }
+          Write-Output $result
