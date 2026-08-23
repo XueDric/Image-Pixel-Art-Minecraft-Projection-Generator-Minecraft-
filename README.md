@@ -31,6 +31,7 @@ A two-stage pipeline that turns any image into a **Litematica building schematic
 - **Material list** — sorted Excel with Chinese block names, counts and color swatches (openpyxl), CSV fallback.
 - **Fast** — numpy-vectorized color matching handles million-pixel images in seconds.
 - **Auto-excludes unstable blocks** — ice (melts), snow layers, soul sand, bedrock, slime/honey (see `mc_palette.py`).
+- **Bilingual GUI** — the desktop app (Tkinter) can switch between **Chinese (`中文`)** and **English** (language selector in the control panel).
 
 > **Why does pure red become orange?** The default CIE Lab distance judges `#FF0000` perceptually closer to orange wool. Use `--color-space rgb` for a literal nearest-color.
 
@@ -94,6 +95,7 @@ Cross-validated against **litemapy** (independent implementation) block-by-block
 ├── main.py               # GUI (Tkinter) entry point
 ├── cli.py                # Command-line entry point
 ├── pipeline.py           # Two-stage core (shared by GUI & CLI)
+├── i18n.py               # GUI language strings (中文 / English)
 ├── mc_palette.py         # MC block colors + matching
 ├── litematic_writer.py   # .litematic v7 NBT writer
 ├── pixelart2litematic.py # Pixel art -> blocks -> schematic / preview
