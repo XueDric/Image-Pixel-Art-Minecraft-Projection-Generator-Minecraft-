@@ -1,5 +1,8 @@
 # Image → Pixel Art → Minecraft Projection Generator
 
+[![CI](https://github.com/XueDric/image-to-mc-pixelart/actions/workflows/ci.yml/badge.svg)](https://github.com/XueDric/image-to-mc-pixelart/actions/workflows/ci.yml)
+[![License](https://img.shields.io/github/license/XueDric/image-to-mc-pixelart)](LICENSE)
+
 > 一条流水线把**任意图片**变成 **Minecraft 建筑投影（`.litematic`）**。
 > 简体中文文档见 [docs/使用说明.md](docs/使用说明.md)。
 
