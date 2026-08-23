@@ -9,7 +9,7 @@ description = "Convert any image into a Minecraft Litematica building projection
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT" }
-authors = [{ name = "Your Name", email = "you@example.com" }]   # TODO: 发布前替换成你的署名
+authors = [{ name = "XueDric", email = "2318248319@qq.com" }]
 keywords = ["minecraft", "pixel-art", "litematic", "schematic", "image-to-schematic"]
 classifiers = [
     "Programming Language :: Python :: 3",
