@@ -10,6 +10,17 @@ A two-stage pipeline that turns any image into a **Litematica building schematic
 1. **Stage 1 — Pixel art.** Resize an image to a target grid (`16×16` → `4096×4096`, or custom `W×H`, optional keep-aspect-ratio). **1 pixel = 1 cell**, and the **original colors are preserved with no palette limit**. Optional background removal / carve-out.
 2. **Stage 2 — Minecraft projection.** Match each cell to the nearest Minecraft block color and export a **`.litematic`** schematic + a **blockified preview PNG** + a **material list** (Excel with Chinese block names, or CSV).
 
+## Download / 下载
+
+Ready-to-run **Windows** binaries (no Python needed) are published on the [Releases page](https://github.com/XueDric/Image-Pixel-Art-Minecraft-Projection-Generator-Minecraft-/releases).
+
+Direct downloads (latest release):
+
+- [图片转MC像素画投影.exe](https://github.com/XueDric/Image-Pixel-Art-Minecraft-Projection-Generator-Minecraft-/releases/latest/download/图片转MC像素画投影.exe) — **GUI** version: pick an image → generate pixel art → generate the MC projection (double-click).
+- [图片转MC像素画投影_命令行.exe](https://github.com/XueDric/Image-Pixel-Art-Minecraft-Projection-Generator-Minecraft-/releases/latest/download/图片转MC像素画投影_命令行.exe) — **command-line** version: for scripts / drag-and-drop an image onto the exe.
+
+> These are PyInstaller single-file builds. Rebuild / upload instructions are in `打包说明.md` (`pyinstaller --noconfirm --clean build.spec`).
+
 ## Screenshots
 
 | Input | Output (blockified projection) |

@@ -10,6 +10,17 @@
 - **阶段2（MC 投影）**：把像素画逐格匹配到最近的 Minecraft 方块颜色，生成
   **Litematica 建筑投影 .litematic** + 方块化预览图 + **材料清单 Excel**（中文方块名）
 
+## 直接下载
+
+**Windows 版**已打包好，无需安装 Python，见 [Releases 发布页](https://github.com/XueDric/Image-Pixel-Art-Minecraft-Projection-Generator-Minecraft-/releases)。
+
+直接下载（最新版本）：
+
+- [图片转MC像素画投影.exe](https://github.com/XueDric/Image-Pixel-Art-Minecraft-Projection-Generator-Minecraft-/releases/latest/download/图片转MC像素画投影.exe) — **图形界面版**：选图片→生成像素画→生成MC投影（双击即可）。
+- [图片转MC像素画投影_命令行.exe](https://github.com/XueDric/Image-Pixel-Art-Minecraft-Projection-Generator-Minecraft-/releases/latest/download/图片转MC像素画投影_命令行.exe) — **命令行版**：适合脚本 / 把图片拖到 exe 上。
+
+> 均为 PyInstaller 单文件版。重新打包 / 上传方法见 `打包说明.md`（`pyinstaller --noconfirm --clean build.spec`）。
+
 ---
 
 ## 一、直接使用（推荐）
