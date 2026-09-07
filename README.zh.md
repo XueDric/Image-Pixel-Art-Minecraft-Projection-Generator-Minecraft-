@@ -16,8 +16,8 @@
 
 直接下载（最新版本）：
 
-- [图片转MC像素画投影.exe](https://github.com/XueDric/Image-Pixel-Art-Minecraft-Projection-Generator-Minecraft-/releases/latest/download/图片转MC像素画投影.exe) — **图形界面版**：选图片→生成像素画→生成MC投影（双击即可）。
-- [图片转MC像素画投影_命令行.exe](https://github.com/XueDric/Image-Pixel-Art-Minecraft-Projection-Generator-Minecraft-/releases/latest/download/图片转MC像素画投影_命令行.exe) — **命令行版**：适合脚本 / 把图片拖到 exe 上。
+- [图片转MC像素画投影](https://github.com/XueDric/Image-Pixel-Art-Minecraft-Projection-Generator-Minecraft-/releases/latest/download/MC.exe) — **图形界面版**：选图片→生成像素画→生成MC投影（双击即可）。
+- [图片转MC像素画投影_命令行版本](https://github.com/XueDric/Image-Pixel-Art-Minecraft-Projection-Generator-Minecraft-/releases/latest/download/MC._.exe) — **命令行版**：适合脚本 / 把图片拖到 exe 上。
 
 > 均为 PyInstaller 单文件版。重新打包 / 上传方法见 `打包说明.md`（`pyinstaller --noconfirm --clean build.spec`）。
 
