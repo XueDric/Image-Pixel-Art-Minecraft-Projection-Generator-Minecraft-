@@ -1,5 +1,7 @@
 # 图片 → 像素画 → Minecraft投影 生成器
 
+[English](README.md) | 中文
+
 一条流水线完成：**任意图片 → 像素画 → Minecraft 建筑投影（.litematic）**。
 
 - **阶段1（像素画）**：把图片缩放到指定像素尺寸（16×16 ~ 4096×4096 或自定义宽高，
@@ -157,7 +159,7 @@ python cli.py 图片.png    # 命令行
 ├── pixelart2litematic.py # 方块匹配/投影生成/预览渲染
 ├── app_icon.ico          # 程序图标
 ├── requirements.txt
-├── README.zh.md
+├── README.zh.md          # 完整中文手册
 ├── 打包说明.md
 ├── 打包程序/              # 已打包的 exe
 └── 测试/

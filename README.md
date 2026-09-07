@@ -1,10 +1,9 @@
 # Image → Pixel Art → Minecraft Projection Generator
 
-[![CI](https://github.com/XueDric/image-to-mc-pixelart/actions/workflows/ci.yml/badge.svg)](https://github.com/XueDric/image-to-mc-pixelart/actions/workflows/ci.yml)
-[![License](https://img.shields.io/github/license/XueDric/image-to-mc-pixelart)](LICENSE)
+[![CI](https://github.com/XueDric/Image-Pixel-Art-Minecraft-Projection-Generator-Minecraft-/actions/workflows/ci.yml/badge.svg)](https://github.com/XueDric/Image-Pixel-Art-Minecraft-Projection-Generator-Minecraft-/actions/workflows/ci.yml)
+[![License](https://img.shields.io/github/license/XueDric/Image-Pixel-Art-Minecraft-Projection-Generator-Minecraft-)](LICENSE)
 
-> 一条流水线把**任意图片**变成 **Minecraft 建筑投影（`.litematic`）**。
-> 简体中文文档见 [README.zh.md](README.zh.md)。
+English | [中文](README.zh.md)
 
 A two-stage pipeline that turns any image into a **Litematica building schematic** you can load in Minecraft:
 
@@ -105,8 +104,8 @@ Cross-validated against **litemapy** (independent implementation) block-by-block
 ├── requirements.txt      # Runtime deps
 ├── requirements-dev.txt  # Dev/test deps (pytest, litemapy)
 ├── LICENSE               # MIT
-├── examples/ ... 示例/       # Sample input + preview
-├── README.zh.md         # Full Chinese manual
+├── 示例/                    # Sample input + preview
+├── README.zh.md            # Full Chinese manual
 ├── .github/workflows/ci.yml # CI: pytest on Ubuntu + Windows
 └── 测试/                 # Tests (litemapy cross-check + NBT round-trip)
 ```

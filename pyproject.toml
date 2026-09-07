@@ -38,11 +38,11 @@ py-modules = [
     "main",
     "cli",
     "pipeline",
+    "i18n",
     "mc_palette",
     "mc_names",
     "litematic_writer",
     "pixelart2litematic",
-    "i18n",
 ]
 
 [tool.pytest.ini_options]

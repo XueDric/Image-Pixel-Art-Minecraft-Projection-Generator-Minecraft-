@@ -10,6 +10,7 @@ venv/
 # exe 二进制走 GitHub Releases，不提交进仓库
 build/
 dist/
+.exetmp/
 # 只忽略 PyInstaller 自动生成的 spec（故意的 build.spec 保留提交）
 图片转MC像素画投影.spec
 图片转MC像素画投影_命令行.spec
