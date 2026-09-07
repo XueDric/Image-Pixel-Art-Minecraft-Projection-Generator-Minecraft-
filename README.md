@@ -16,8 +16,8 @@ Ready-to-run **Windows** binaries (no Python needed) are published on the [Relea
 
 Direct downloads (latest release):
 
-- [MC.exe](https://github.com/XueDric/Image-Pixel-Art-Minecraft-Projection-Generator-Minecraft-/releases/latest/download/MC.exe) — **GUI** version: pick an image → generate pixel art → generate the MC projection (double-click).
-- [MC._.exe](https://github.com/XueDric/Image-Pixel-Art-Minecraft-Projection-Generator-Minecraft-/releases/latest/download/MC._.exe) — **command-line** version: for scripts / drag-and-drop an image onto the exe.
+- [MC pixel tools](https://github.com/XueDric/Image-Pixel-Art-Minecraft-Projection-Generator-Minecraft-/releases/latest/download/MC.exe) — **GUI** version: pick an image → generate pixel art → generate the MC projection (double-click).
+- [MC pixel tools with command-line](https://github.com/XueDric/Image-Pixel-Art-Minecraft-Projection-Generator-Minecraft-/releases/latest/download/MC._.exe) — **command-line** version: for scripts / drag-and-drop an image onto the exe.
 
 > These are PyInstaller single-file builds. Rebuild / upload instructions are in `打包说明.md` (`pyinstaller --noconfirm --clean build.spec`).
 
